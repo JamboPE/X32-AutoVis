@@ -31,11 +31,16 @@ def send_osc_command(ip, port, address, *args):
         client.send_message(address, args)
 
 if __name__ == "__main__":
+    print("Connecting to ATEM switcher...")
     ATEM.connect(atem_ip)
-    ATEM.preview(1)
-    ATEM.program(1)
+    print("Connected to ATEM switcher")
+    print("Setting Program and Preview to Camera 2")
+    ATEM.preview(2)
+    ATEM.program(2)
 
+    print("Starting AutoVis loop")
     while True:
+        print*"Checking if VT is playing (checking for mute group 1)..."
         while send_osc_command(X32_ip, 10023, "/config/mute/1") == "OFF": # Only runs autovis if a VT isn't playing (detected based on X32 mute group being on)
             print("Getting mic levels...")
             meters = []

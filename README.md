@@ -1,7 +1,7 @@
 # Automatic Visionmixing for YSTV Live using X32 input levels
 
 ### Configuration
-Change IP addresses in `main.py`
+Change variables in `src/`
 
 ### Installation
 1. Change directory to build: `cd build`

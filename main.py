@@ -2,8 +2,8 @@ import PyATEMMax
 from pythonosc import udp_client
 import time
 
-atem_ip = "144.32.210.2"
-X32_ip =  "144.32.210.3"
+atem_ip = "144.32.210.206"
+X32_ip =  "144.32.210.211"
 leftMics = [0,1] # zero indexed lol
 rightMics = [2,3] # zero indexed lol
 micLevelThreshold = 0
@@ -28,7 +28,7 @@ class ATEM:
 
 def send_osc_command(ip, port, address, *args):
         client = udp_client.SimpleUDPClient(ip, port)
-        client.send_message(address, args)
+        print(client.send_message(address, args))
 
 if __name__ == "__main__":
     print("Connecting to ATEM switcher...")
@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
     print("Starting AutoVis loop")
     while True:
-        print*"Checking if VT is playing (checking for mute group 1)..."
+        print("Checking if VT is playing (checking for mute group 1)...")
         while send_osc_command(X32_ip, 10023, "/config/mute/1") == "OFF": # Only runs autovis if a VT isn't playing (detected based on X32 mute group being on)
             print("Getting mic levels...")
             meters = []
